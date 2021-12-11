@@ -110,10 +110,10 @@ exports.onThirdPartyLogin = async (req, res) => {
     const {
         id,
         displayName,
-        emails,
+        emails = [],
         provider,
     } = req.federatedUser;
-    const email = emails[0].value;
+    const email = emails.length ? (emails[0].value || '') : '';
     const federatedCredential = await federatedCredentialRepository.getFederatedCredential(provider, id);
     let user = null;
     if (!federatedCredential) {
