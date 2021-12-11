@@ -1,0 +1,43 @@
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Dashboard</h1>
+
+    <p>id: <%= user.id %></p>
+    <p>name: 
+        <input id="name" type="text" name="name" value="<%= user.name %>" placeholder="name"/>
+        <button onclick="changeName()">ChangeNamae</button>
+    </p>
+    <p>email: <%= user.email %></p>
+    <p>provider: <%= user.provider %></p>
+    
+    <ul>
+        <li><a href="/auth/change_password">Change Password(only email account)</a></li>
+        <li><a href="/auth/logout">Logout</a></li>
+    </ul>
+    
+    <script>
+        function changeName() {
+            $.ajax({
+                url: '/user/name',
+                type : 'PATCH',
+                contentType : 'application/json',
+                data: JSON.stringify({
+                    name: $('#name').val()
+                }),
+                success: function(res){
+                    alert('update success');
+                },
+                error: function(err){
+                    if (err.status === 422) {
+                        alert(err.responseJSON.errors[0].msg);
+                    } else {
+                        alert('has other error');
+                    }
+                },
+            });
+        }
+
+    </script>
+</body>

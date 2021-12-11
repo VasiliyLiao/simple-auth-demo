@@ -1,0 +1,20 @@
+<h1>Sign up</h1>
+
+<% if (hasMessages) { %>
+    <ul>
+    <% messages.forEach(function(message){ %>
+      <li><%= message %></li>
+    <% }); %>
+    </ul>
+<% } %>
+
+<form action="/auth/register" method="POST">
+    <input type="text" name="email" placeholder="email"/>
+    <input type="password" name="password" placeholder="password"/>
+    <input type="password" name="password_confirmation" placeholder="password confirmation"/>
+    <input type="submit" value="Submit"/>
+</form>
+
+<%- include('third_party_login') -%> 
+
+<li><a href="/auth/login">Login</a></li>

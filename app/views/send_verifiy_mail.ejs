@@ -1,0 +1,25 @@
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Sent Verify Email</h1>
+    <button onclick="sendVerifyMail()">Resend Verify Mail</button>
+    <li><a href="/auth/logout">Logout</a></li>
+
+    <script>
+        function sendVerifyMail() {
+            $.ajax({
+                url: '/auth/sent_verify_email',
+                type : 'POST',
+                contentType : 'application/json',
+                data: JSON.stringify({}),
+                success: function(res){
+                    alert('sent success');
+                },
+                error: function(err){
+                    alert('has error');
+                },
+            });
+        }
+    </script>
+</body>
